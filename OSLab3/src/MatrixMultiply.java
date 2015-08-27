@@ -14,7 +14,7 @@ public class MatrixMultiply {
 		
 //		System.out.println("Enter the number of threads to be created: ");
 		//Scanner sc = new Scanner(System.in);
-		Scanner sc = new Scanner(new FileReader("input1.txt"));
+		Scanner sc = new Scanner(new FileReader("input3.txt"));
 //		k = sc.nextInt();
 		
 		System.out.println("Enter m:");
