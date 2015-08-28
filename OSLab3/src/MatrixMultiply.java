@@ -7,7 +7,7 @@ public class MatrixMultiply {
 
 	int arr[][];
 	int arr2[][];
-	int m,n,l,k;
+	int m,n,l;
 	int result[][];
 	
 	
@@ -18,10 +18,10 @@ public class MatrixMultiply {
 		Scanner sc = new Scanner(new FileReader("input3.txt"));
 //		k = sc.nextInt();
 		
-		System.out.println("Enter m:");
+		System.out.println("Enter 1st matrix's m (rows): ");
 		m = sc.nextInt();
 		
-		System.out.println("enter n: ");
+		System.out.println("Enter 1st matrix's n (columns): ");
 		n = sc.nextInt();
 		
 		arr = new int[m][n];
@@ -32,7 +32,7 @@ public class MatrixMultiply {
 			}
 		}
 		
-		System.out.println("Enter l: ");
+		System.out.println("Enter 2nd matrix's l (columns): ");
 		l = sc.nextInt();
 		
 		arr2 = new int[n][l];
@@ -48,6 +48,7 @@ public class MatrixMultiply {
 	
 	public void print(){
 		
+		System.out.println("First matrix entered : ");
 		for(int i=0; i<m; i++){
 			System.out.println();
 			for(int j=0; j<n; j++){
@@ -55,7 +56,7 @@ public class MatrixMultiply {
 			}
 		}
 		
-		System.out.println("\nSecond array");
+		System.out.println("\n\nSecond matrix entered : ");
 		for(int i=0; i<n; i++){
 			System.out.println();
 			for(int j=0; j<l; j++){
@@ -66,11 +67,8 @@ public class MatrixMultiply {
 	}
 	
 	public void printResult(){
-		System.out.println("Result length " + result.length);
-		
-//		for(int i=0; i<l; i++){
-//			System.out.print( result[i] + " ");
-//		}
+		System.out.println("\n\nMultiplication result matrix : ");
+
 		for(int i=0; i<m; i++){
 			System.out.println();
 			for(int j=0; j<l; j++){
@@ -82,7 +80,7 @@ public class MatrixMultiply {
 	public void calculate() throws InterruptedException{
 		ArrayList<Thread> threads = new ArrayList<Thread>();
 		for(int i=0; i<m; i++){
-			MultiplierThread mul = new MultiplierThread(i, arr, arr2, m, n, l, k, result[i]);
+			MultiplierThread mul = new MultiplierThread(i, arr, arr2, m, n, l, result[i]);
 			Thread t = new Thread(mul);
 			threads.add(t);
 			t.start();
@@ -92,17 +90,8 @@ public class MatrixMultiply {
 			t.join();
 		}
 		
-		printResult();
-		
-//		MultiplierThread mul = new MultiplierThread(0, arr, arr2, m, n, l, k, result);
-//		Thread realThread = new Thread(mul);
-//		realThread.start();
-//		try {
-//			realThread.join();
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//		printResult();
+		printResult();		
+
 	}
 	
 }
