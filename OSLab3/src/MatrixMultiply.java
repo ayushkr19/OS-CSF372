@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MatrixMultiply {
@@ -7,7 +8,7 @@ public class MatrixMultiply {
 	int arr[][];
 	int arr2[][];
 	int m,n,l,k;
-	int result[];
+	int result[][];
 	
 	
 	public MatrixMultiply() throws FileNotFoundException {
@@ -42,8 +43,7 @@ public class MatrixMultiply {
 			}
 		}
 		
-		result = new int[l];
-		
+		result = new int[m][l];
 	}
 	
 	public void print(){
@@ -68,21 +68,41 @@ public class MatrixMultiply {
 	public void printResult(){
 		System.out.println("Result length " + result.length);
 		
-		for(int i=0; i<l; i++){
-			System.out.print( result[i] + " ");
+//		for(int i=0; i<l; i++){
+//			System.out.print( result[i] + " ");
+//		}
+		for(int i=0; i<m; i++){
+			System.out.println();
+			for(int j=0; j<l; j++){
+				System.out.print(result[i][j] + " ");
+			}
 		}
 	}
 	
-	public void calculate(){
-		MultiplierThread mul = new MultiplierThread(0, arr, arr2, m, n, l, k, result);
-		Thread realThread = new Thread(mul);
-		realThread.start();
-		try {
-			realThread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+	public void calculate() throws InterruptedException{
+		ArrayList<Thread> threads = new ArrayList<Thread>();
+		for(int i=0; i<m; i++){
+			MultiplierThread mul = new MultiplierThread(i, arr, arr2, m, n, l, k, result[i]);
+			Thread t = new Thread(mul);
+			threads.add(t);
+			t.start();
 		}
+		
+		for(Thread t: threads){
+			t.join();
+		}
+		
 		printResult();
+		
+//		MultiplierThread mul = new MultiplierThread(0, arr, arr2, m, n, l, k, result);
+//		Thread realThread = new Thread(mul);
+//		realThread.start();
+//		try {
+//			realThread.join();
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+//		printResult();
 	}
 	
 }
