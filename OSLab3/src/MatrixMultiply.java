@@ -15,7 +15,7 @@ public class MatrixMultiply {
 		
 //		System.out.println("Enter the number of threads to be created: ");
 		//Scanner sc = new Scanner(System.in);
-		Scanner sc = new Scanner(new FileReader("input3.txt"));
+		Scanner sc = new Scanner(new FileReader("input.txt"));
 //		k = sc.nextInt();
 		
 		System.out.println("Enter 1st matrix's m (rows): ");
@@ -84,6 +84,7 @@ public class MatrixMultiply {
 			Thread t = new Thread(mul);
 			threads.add(t);
 			t.start();
+			Util.println(t.getName() + " is starting!");
 		}
 		
 		for(Thread t: threads){

@@ -29,21 +29,22 @@ public class MultiplierThread implements Runnable {
 
 		for(int i=0; i<l; i++){
 			for(int j=0; j<n; j++){
-				Util.println("Loop : " + i + " " + j);
-				Util.println("Prev result " + result[i]);
+				Util.println("Thread " + rowNumber + ", Loop : " + i + " " + j);
+				Util.println("Thread " + rowNumber + ", Prev result " + result[i]);
 
-				Util.println(arr[rowNumber][j]);
-				Util.println(arr2[j][i]);
+				Util.println("Thread " + rowNumber + ", " + arr[rowNumber][j]);
+				Util.println("Thread " + rowNumber + ", " + arr2[j][i]);
 
-				Util.println(arr[rowNumber][j]*arr2[j][i]);
+				Util.println("Thread " + rowNumber + ", " + arr[rowNumber][j]*arr2[j][i]);
 				result[i] += arr[rowNumber][j]*arr2[j][i];
 
-				Util.println("Final result : " + result[i]);
+				Util.println("Thread " + rowNumber + ", Final result : " + result[i]);
 			}
 
 		}
 
 		for(int i=0; i<l; i++){
+			Util.println("Thread " + rowNumber);
 			Util.print(result[i] + " ");
 		}
 	}
